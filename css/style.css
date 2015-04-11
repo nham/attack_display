@@ -1,0 +1,45 @@
+body {
+    font-family: sans-serif;
+    background-color: #efefef;
+    color: #cc3300;
+}
+
+td.center {
+    text-align: center;
+}
+
+table {
+    font-size: 54px;
+    padding: 15px;
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    border: 4px solid #555555;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 72px;
+}
+
+h2 {
+    font-style: italic;
+    font-size: 64px;
+}
+
+div#container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+th#col_player {
+    width: 40%;
+}
+
+th#col_PP {
+    width: 25%;
+}
