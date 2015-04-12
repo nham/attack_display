@@ -8,40 +8,28 @@
 </head>
 <body>
 <div id="container">
-    <h1>Round 5,  Turn 3</h1>
-    <h2>Waiting on Mike</h2>
+    <div id="status">
+        <h1>Game status:</h1> 
+        <div id="status_text"></div>
+        <div id="buttondiv">
+            <button id="step" type="button">&gt;&gt;</button>
+        </div>
+    </div>
 
-    <table>
-    <tr>
-    <th id="col_player"></th>
-    <th id="col_PP">PP</th>
-    <th id="col_regions">Regions</th>
-    </tr>
+    <h1>Players:</h1>
 
-    <tr>
-    <td>Nick</td>
-    <td class="center">43</td>
-    <td class="center">8</td>
-    </tr>
-
-    <tr>
-    <td>Andy</td>
-    <td class="center">53</td>
-    <td class="center">12</td>
-    </tr>
-
-    <tr>
-    <td>Mike</td>
-    <td class="center">34</td>
-    <td class="center">7</td>
-    </tr>
-
-    <tr>
-    <td>Kodi</td>
-    <td class="center">43</td>
-    <td class="center">9</td>
-    </tr>
+    <table id="players">
+        <tr>
+        <th id="col_player"></th>
+        <th id="col_PP">PP</th>
+        <th id="col_regions">Regions</th>
+        </tr>
     </table>
+
+    <div id="add_player">
+        Add player: <input type="text" id="new_player_name">
+    </div>
 </div>
+<script src="js/attack.js"></script>
 </body>
 </html>
