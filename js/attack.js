@@ -75,6 +75,21 @@ $(document).on("blur", "table input", function() {
     renderGameState(state);
 });
 
+
+$(document).on("keyup", "table input", function(e) {
+    if (e.keyCode == 13) {
+        // This sucks
+        var i = $(this).parent().parent().prevAll().length - 1;
+
+        if($(this).hasClass("input_pp")) {
+            state.players[i].pp = $(this).val();
+        } else {
+            state.players[i].regions = $(this).val();
+        }
+        renderGameState(state);
+    }
+});
+
 // initial state
 var state = {
     // phase 0 = roll for order
