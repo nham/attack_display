@@ -1,16 +1,23 @@
 var renderGameState = function(state) {
-    var statusText;
-    if(jQuery.isEmptyObject(state.step)) {
-        statusText = "Setup";
-    } else {
+    var phaseName, phaseContent;
+    if(state.phase === 0) {
+        phaseName = "Determine order";
+        phaseContent = "#start_content";
+    } else if(state.phase === 1) {
         // hide new player form if the game has started
         $("#add_player").hide();
 
-        statusText = "Round " + state.step.round
-                   + ", Turn " + state.step.turn;
+        phaseName = "Setup";
+        phaseContent = "#setup_content";
+    } else {
+
+        phaseName = "Round " + state.phase_data.round
+                   + ", Turn " + state.phase_data.turn;
+        phaseContent = "#turn_content";
     }
 
-    $("#status_text").text(statusText);
+    $("#phase_name").text(phaseName);
+    $("#phase_content").html( $(phaseContent).html() );
 
     // remove old players
     $("table tr.player").remove();
@@ -32,16 +39,17 @@ $("#new_player_name").keyup(function (e) {
 });
 
 $("button#step").click(function() {
-    if(jQuery.isEmptyObject(state.step)) {
-        state.step = {round: 1, turn: 1};
+    if(state.phase === 1) {
+        state.phase_data = {round: 1, turn: 1};
     } else {
-        if(state.step.turn === 3) {
-            state.step = {round: state.step.round + 1, turn: 1}
+        if(state.phase_data.turn === 3) {
+            state.phase_data = {round: state.phase_data.round + 1, turn: 1}
         } else {
-            state.step.turn = state.step.turn + 1;
+            state.phase_data.turn = state.phase_data.turn + 1;
         }
     }
 
+    state.phase += 1;
     renderGameState(state);
 });
 
@@ -69,10 +77,11 @@ $(document).on("blur", "table input", function() {
 
 // initial state
 var state = {
-    // [] to begin with
-    // after setup, step becomes [r, t]
-    // r is round number, t is turn number
-    step: {},
+    // phase 0 = roll for order
+    // phase 1 =  claim territories, place initial  units
+    // phase 2 and above = turns
+    phase: 0,
+    phase_data: {},
 
     // array of players. each player has a name, PP and number of regions
     // owned. this is 30 and 4, respectively, to start out

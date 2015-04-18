@@ -5,42 +5,50 @@ body {
 }
 
 div#container {
-    width: 95%;
+    width: 98%;
     margin: 0 auto;
 }
 
 h1 { font-size: 54px; }
 
-div#status {
-    font-weight: bold;
-    margin-bottom: 20px;
+/*** Top ***/
+div#top {
+    width: 100%;
 }
 
-div#status_text {
+#buttondiv {
     text-align: center;
-    font-size: 72px;
-    color: #cc3300;
+    width: 600px;
+    display: inline-block;
 }
 
 button#step {
-    font-size: 60px;
+    font-size: 55px;
     color: #cc3300;
     font-weight: bold;
     border: 5px solid #cc3300;
 }
 
-#buttondiv {
-    margin-top: 30px;
+
+div#phase_name {
     text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: #cc3300;
+    display: inline-block;
 }
 
+
+/*** Players ***/
+
 table {
-    padding: 15px;
+    padding: 10px;
     width: 90%;
-    margin: 30px auto;
+    margin: 10px auto;
     border-collapse: collapse;
     color: #cc3300;
-    font-size: 54px;
+    font-size: 42px;
+    clear: both;
 }
 
 td.pp, td.regions {
@@ -48,23 +56,49 @@ td.pp, td.regions {
 }
 
 th, td {
-    padding: 15px;
+    padding: 12px;
     border: 4px solid #555555;
 }
 
 th#col_player { width: 50%; }
 th#col_PP { width: 20%; }
 
+table input {
+    font-size: 54px;
+    width: 100px;
+}
+
+
+/*** Add player ***/
 
 div#add_player {
     font-size: 40px;
+    margin: 15px 5px;
 }
 
 div#add_player input {
     font-size: 40px;
 }
 
-table input {
-    font-size: 54px;
-    width: 100px;
+
+
+/*** Content ***/
+
+div.phase_content {
+    display: none;
 }
+
+div#phase_content {
+    padding: 10px;
+    border: 5px solid #404040;
+}
+
+div#phase_content h2 {
+    font-size: 36px;
+}
+div#phase_content p,
+div#phase_content li { 
+    font-size: 28px;
+}
+
+
