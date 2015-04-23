@@ -22,7 +22,7 @@ var renderGameState = function(state) {
     // remove old players
     $("table tr.player").remove();
     $.each(state.players, function(i, p) {
-        $("#players").append('<tr class="player"><td>'+p.name+'</td>'
+        $("#players").append('<tr class="player"><td> </td><td>'+p.name+'</td>'
              +'<td class="pp">'+p.pp+'</td>'
              +'<td class="regions">'+p.regions+'</td></tr>');
     });
