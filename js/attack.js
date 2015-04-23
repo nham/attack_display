@@ -1,23 +1,34 @@
 var renderGameState = function(state) {
-    var phaseName, phaseInfo;
+    var phaseName, phaseInfo, phaseUI;
     if(state.phase === 0) {
         phaseName = "Determine order";
         phaseInfo = "#start_info";
+        phaseUI = null;
     } else if(state.phase === 1) {
         // hide new player form if the game has started
         $("#add_player").hide();
 
         phaseName = "Setup";
         phaseInfo = "#setup_info";
+        phaseUI = null;
     } else {
 
         phaseName = "Round " + state.phase_data.round
                    + ", Turn " + state.phase_data.turn;
         phaseInfo = "#turn_info";
+        phaseUI = "#turn_ui";
     }
 
     $("#phase_name").text(phaseName);
     $("#phase_info").html( $(phaseInfo).html() );
+
+    if(phaseUI !== null) {
+        $("#phase_ui").hide();
+        build_turn_ui(phaseUI, state);
+        $("#phase_ui").show();
+    } else {
+        $("#phase_ui").hide();
+    }
 
     // remove old players
     $("table tr.player").remove();
@@ -26,6 +37,21 @@ var renderGameState = function(state) {
              +'<td class="pp">'+p.pp+'</td>'
              +'<td class="regions">'+p.regions+'</td></tr>');
     });
+};
+
+var build_turn_ui = function(phaseUI, state) {
+    // set up initial UI Html
+    $("#phase_ui").html( $(phaseUI).html() );
+
+    // add players to the "turn action table"
+    $.each(state.players, function(i, p) {
+        $("#turn_players").append('<tr class="turn_player"><td>'+p.name+'</td>'
+             +'<td class="turn_action"></td></tr>');
+    });
+
+    // now put in the drop downs
+    var action_sel = $("#action_select_template").clone().removeAttr('id');
+    $("#turn_players td.turn_action").html( action_sel );
 };
 
 

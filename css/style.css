@@ -86,10 +86,13 @@ div#add_player input {
 
 div.phase_ui {
     display: none;
+    text-align: center;
 }
 
 div#phase_ui {
+    display: none;
     padding: 10px;
+    border: 1px solid #404040;
 }
 
 
@@ -113,3 +116,41 @@ div#phase_info li {
 }
 
 
+/*** Turn UI ***/
+table#turn_players {
+    width: 720px;
+    margin: 10px auto;
+    color: #cc3300;
+    font-size: 38;
+}
+
+table#turn_players th,
+table#turn_players td {
+    padding: 8px;
+    border: 2px solid #555555;
+}
+
+table#turn_players td.turn_action {
+    width: 350px;
+}
+
+#action_select_template {
+    display: none;
+}
+
+select.turn_action_select {
+    font-size: 26px;
+    color: #202020;
+}
+
+div#turn_order {
+    width: 100%;
+    text-align: center;
+}
+
+
+button#det_turn_order {
+    font-size: 40px;
+    color: #cc3300;
+    border: 3px solid #cc3300;
+}
