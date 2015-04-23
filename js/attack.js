@@ -1,23 +1,23 @@
 var renderGameState = function(state) {
-    var phaseName, phaseContent;
+    var phaseName, phaseInfo;
     if(state.phase === 0) {
         phaseName = "Determine order";
-        phaseContent = "#start_content";
+        phaseInfo = "#start_info";
     } else if(state.phase === 1) {
         // hide new player form if the game has started
         $("#add_player").hide();
 
         phaseName = "Setup";
-        phaseContent = "#setup_content";
+        phaseInfo = "#setup_info";
     } else {
 
         phaseName = "Round " + state.phase_data.round
                    + ", Turn " + state.phase_data.turn;
-        phaseContent = "#turn_content";
+        phaseInfo = "#turn_info";
     }
 
     $("#phase_name").text(phaseName);
-    $("#phase_content").html( $(phaseContent).html() );
+    $("#phase_info").html( $(phaseInfo).html() );
 
     // remove old players
     $("table tr.player").remove();

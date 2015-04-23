@@ -81,23 +81,33 @@ div#add_player input {
 }
 
 
+/*** Phase UI ***/
 
-/*** Content ***/
-
-div.phase_content {
+div.phase_ui {
     display: none;
 }
 
-div#phase_content {
+div#phase_ui {
+    padding: 10px;
+}
+
+
+/*** Phase Info ***/
+
+div.phase_info {
+    display: none;
+}
+
+div#phase_info {
     padding: 10px;
     border: 5px solid #404040;
 }
 
-div#phase_content h2 {
+div#phase_info h2 {
     font-size: 36px;
 }
-div#phase_content p,
-div#phase_content li { 
+div#phase_info p,
+div#phase_info li {
     font-size: 28px;
 }
 
