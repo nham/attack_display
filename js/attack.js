@@ -45,6 +45,23 @@ var renderGameState = function(state) {
 
 /*** Turn UI ***/
 
+// Transition to the next phase of the game via button click
+$(document).on("click", "button#det_turn_order", function() {
+    // grab everyone's action.
+    var actions = [];
+    var gotNaN = false;
+    $("div#phase_ui select.turn_action_select").each(function(i) {
+        var i = parseInt( $(this).val() );
+        if(isNaN(i)) { gotNaN = true; }
+        actions.push(i);
+    });
+
+    if(!gotNaN) {
+        console.log(actions);
+    }
+});
+
+
 var build_turn_ui = function(phaseUI, state) {
     // set up initial UI Html
     $("#phase_ui").html( $(phaseUI).html() );
