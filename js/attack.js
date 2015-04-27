@@ -1,3 +1,6 @@
+// We call this whenever the state changes.
+// I think this is an ad-hoc, buggy, half-implementation
+// of React. Oh well.
 var renderGameState = function(state) {
     var phaseName, phaseContent;
     if(state.phase === 0) {
@@ -29,6 +32,7 @@ var renderGameState = function(state) {
 };
 
 
+// Submit the New Player Name text input via enter key
 $("#new_player_name").keyup(function (e) {
     if (e.keyCode == 13) {
         var new_name = $(this).val();
@@ -38,6 +42,7 @@ $("#new_player_name").keyup(function (e) {
     }
 });
 
+// Transition to the next phase of the game via button click
 $("button#step").click(function() {
     if(state.phase === 1) {
         state.phase_data = {round: 1, turn: 1};
@@ -63,6 +68,8 @@ $(document).on("dblclick", "td.regions", function() {
     $(this).html('<input type="text" class="input_regions" value="'+val+'">');
 });
 
+
+// For submitting new value by blurring focus
 $(document).on("blur", "table input", function() {
     // This sucks
     var i = $(this).parent().parent().prevAll().length - 1;
@@ -76,6 +83,7 @@ $(document).on("blur", "table input", function() {
 });
 
 
+// For submitting new value by pressing enter
 $(document).on("keyup", "table input", function(e) {
     if (e.keyCode == 13) {
         // This sucks
