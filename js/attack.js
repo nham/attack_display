@@ -179,7 +179,7 @@ $(document).on("click", "button#det_turn_order", function() {
         trs.detach().appendTo("table#turn_players");
 
         // finally, hide the button. dont need it any more.
-        $("button#det_turn_order").hide();
+        $("#phase_ui button#det_turn_order").hide();
     }
 });
 
