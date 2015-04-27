@@ -14,6 +14,7 @@ h1 { font-size: 54px; }
 /*** Top ***/
 div#top {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 #buttondiv {
@@ -81,24 +82,79 @@ div#add_player input {
 }
 
 
+/*** Phase UI ***/
 
-/*** Content ***/
+div.phase_ui {
+    display: none;
+    text-align: center;
+}
 
-div.phase_content {
+div#phase_ui {
+    display: none;
+    padding: 10px;
+    border: 1px solid #404040;
+}
+
+
+/*** Phase Info ***/
+
+div.phase_info {
     display: none;
 }
 
-div#phase_content {
+div#phase_info {
     padding: 10px;
     border: 5px solid #404040;
 }
 
-div#phase_content h2 {
+div#phase_info h2 {
     font-size: 36px;
 }
-div#phase_content p,
-div#phase_content li { 
+div#phase_info p,
+div#phase_info li {
     font-size: 28px;
 }
 
 
+/*** Turn UI ***/
+table#turn_players {
+    width: 760px;
+    margin: 10px auto;
+    color: #cc3300;
+    font-size: 38px;
+}
+
+table#turn_players th,
+table#turn_players td {
+    padding: 8px;
+    border: 2px solid #555555;
+}
+
+table#turn_players td.turn_action {
+    width: 320px;
+    text-align: center;
+    color: #202020;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#action_select_template {
+    display: none;
+}
+
+select.turn_action_select {
+    font-size: 26px;
+    color: #202020;
+}
+
+div#turn_order {
+    width: 100%;
+    text-align: center;
+}
+
+
+button#det_turn_order {
+    font-size: 40px;
+    color: #cc3300;
+    border: 3px solid #cc3300;
+}
