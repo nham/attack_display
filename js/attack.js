@@ -1,3 +1,24 @@
+// From http://stackoverflow.com/a/2450976/3109948
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
 // We call this whenever the state changes.
 // I think this is an ad-hoc, buggy, half-implementation
 // of React. Oh well.
@@ -63,12 +84,41 @@ $(document).on("click", "button#det_turn_order", function() {
             actions[i] = [i, actions[i]];
         }
 
+        var tiebreaker = [null];
+
+        for(var i = 0; i < 6; i++) {
+            tiebreaker.push([]);
+        }
+
+        for(var i = 0; i < actions.length; i++) {
+            var current = actions[i];
+            var this_action = current[1];
+            tiebreaker[this_action].push(current[0]);
+        }
+
+        for(var i = 1; i <= 6; i++) {
+            shuffle(tiebreaker[i]);
+        }
+
         actions.sort(function(a, b) {
             if(a[1] < b[1]) {
                 return -1;
             } else if(a[1] > b[1]) {
                 return 1;
             } else {
+                var action = a[1];
+                var tb = tiebreaker[action];
+                console.log("tiebreaker["+action+"] = "+tb);
+                var a_index = tb.indexOf(a[0]);
+                var b_index = tb.indexOf(b[0]);
+
+                if(a_index < b_index) {
+                    return -1;
+                } else if(a_index > b_index) {
+                    return 1;
+                } else {
+                    alert("reached tie when sorting players "+a[0]+" and "+b[0]);
+                }
                 return 0;
             }
 
