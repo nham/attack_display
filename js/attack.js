@@ -27,6 +27,8 @@ var renderGameState = function(state) {
 
     if(phaseUI !== null) {
         $("#phase_ui").hide();
+        // remove old players
+        $("table#turn_players tr").remove();
         build_turn_ui(phaseUI, state);
         $("#phase_ui").show();
     } else {
@@ -57,7 +59,77 @@ $(document).on("click", "button#det_turn_order", function() {
     });
 
     if(!gotNaN) {
-        console.log(actions);
+        for(var i = 0; i < actions.length; i++) {
+            actions[i] = [i, actions[i]];
+        }
+
+        actions.sort(function(a, b) {
+            if(a[1] < b[1]) {
+                return -1;
+            } else if(a[1] > b[1]) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        });
+
+        // sorry, this is gross
+        var action_names = [null, "Trade", "Strategic Move",
+                            "Diplomatic Blitz", "Move and Attack!",
+                            "Blitzkrieg Move", "Build New Units"];
+
+        // let j be the index such that xs[j] = [i, <a value>]
+        // (if it exists)
+        // then find_index(xs, i) returns [j, <the value>]
+        var find_index = function(xs, i) {
+            for(var j = 0; j < xs.length; j++) {
+                if(xs[j][0] === i) {
+                    return [j, xs[j][1]];
+                }
+            }
+
+            return null;
+        };
+
+        var find_value = function(xs, i) {
+            return find_index(xs, i)[1];
+        }
+
+        // replace the selects with text
+        $("table#turn_players td.turn_action").each(function(i) {
+            var tmp = find_index(actions, i);
+            var new_order = tmp[0];
+            var player_action = tmp[1];
+
+            // remove select elements
+            $(this).children().remove();
+
+            // replace with text of the action taken
+            $(this).text(action_names[player_action]);
+
+            // attach order as a data element to parent (tr)
+            $(this).parent().data("new_order", new_order);
+        });
+
+        // actually re=order the tr elements
+        var trs = $("table#turn_players tr");
+        trs.sort(function(a, b) {
+            var x = $(a).data("new_order");
+            var y = $(b).data("new_order");
+            if(x < y) {
+                return -1;
+            } else if (x > y) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+        trs.detach().appendTo("table#turn_players");
+
+        // finally, hide the button. dont need it any more.
+        $("button#det_turn_order").hide();
     }
 });
 
