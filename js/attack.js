@@ -46,14 +46,17 @@ var renderGameState = function(state) {
     $("#phase_name").text(phaseName);
     $("#phase_info").html( $(phaseInfo).html() );
 
-    if(phaseUI !== null) {
-        $("#phase_ui").hide();
-        // remove old players
-        $("table#turn_players tr").remove();
-        build_turn_ui(phaseUI, state);
-        $("#phase_ui").show();
-    } else {
-        $("#phase_ui").hide();
+    // if flag is set, dont redraw phase_ui
+    if(state.turn_order_determined !== true) {
+        if(phaseUI !== null) {
+            $("#phase_ui").hide();
+            // remove old players
+            $("table#turn_players tr").remove();
+            build_turn_ui(phaseUI, state);
+            $("#phase_ui").show();
+        } else {
+            $("#phase_ui").hide();
+        }
     }
 
     // remove old players
@@ -180,6 +183,8 @@ $(document).on("click", "button#det_turn_order", function() {
 
         // finally, hide the button. dont need it any more.
         $("#phase_ui button#det_turn_order").hide();
+
+        state.turn_order_determined = true;
     }
 });
 
@@ -222,6 +227,7 @@ $("button#step").click(function() {
         }
     }
 
+    state.turn_order_determined = false; // reset this flag whenever we step to next phase
     state.phase += 1;
     renderGameState(state);
 });
@@ -272,6 +278,8 @@ var state = {
     // phase 1 =  claim territories, place initial  units
     // phase 2 and above = turns
     phase: 0,
+
+    // for holding turn/round number
     phase_data: {},
 
     // array of players. each player has a name, PP and number of regions
@@ -284,8 +292,9 @@ var state = {
         {name: 'Kodi', pp: 43, regions: 9}
     ],
     */
-
     players: [],
+
+    turn_order_determined: false,
 };
 
 renderGameState(state);
