@@ -74,6 +74,7 @@ var renderGameState = function(state) {
 // Transition to the next phase of the game via button click
 $(document).on("click", "button#det_turn_order", function() {
     // grab everyone's action.
+    var num_actions = 10;
     var actions = [];
     var gotNaN = false;
     $("div#phase_ui select.turn_action_select").each(function(i) {
@@ -89,7 +90,7 @@ $(document).on("click", "button#det_turn_order", function() {
 
         var tiebreaker = [null];
 
-        for(var i = 0; i < 6; i++) {
+        for(var i = 0; i < num_actions; i++) {
             tiebreaker.push([]);
         }
 
@@ -99,7 +100,7 @@ $(document).on("click", "button#det_turn_order", function() {
             tiebreaker[this_action].push(current[0]);
         }
 
-        for(var i = 1; i <= 6; i++) {
+        for(var i = 1; i <= num_actions; i++) {
             shuffle(tiebreaker[i]);
         }
 
@@ -128,9 +129,19 @@ $(document).on("click", "button#det_turn_order", function() {
         });
 
         // sorry, this is gross
+        /* this is for the custom variant found online that
+         * we played for months
         var action_names = [null, "Trade", "Strategic Move",
                             "Diplomatic Blitz", "Move and Attack!",
                             "Blitzkrieg Move", "Build New Units"];
+        */
+
+        var action_names = [null, "Trade", "Research",
+                            "Strategic Move", "Diplomatic Blitz",
+                            "Strategic Bombing", "Move and Attack!",
+                            "Trade Route Auction", "Commerce Raiding",
+                            "Play Political Action Cards", "Build New Units"
+                            ];
 
         // let j be the index such that xs[j] = [i, <a value>]
         // (if it exists)
